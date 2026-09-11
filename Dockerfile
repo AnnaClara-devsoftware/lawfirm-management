@@ -12,7 +12,7 @@ RUN apk add --no-cache wget \
     && adduser -S -G appgroup appuser \
     && mkdir -p /app/storage/documents \
     && chown -R appuser:appgroup /app
-COPY --from=build --chown=appuser:appgroup /app/target/lawfirm-management-0.1.0.jar /app/app.jar
+COPY --from=build --chown=appuser:appgroup /app/target/*.jar /app/app.jar
 USER appuser
 EXPOSE 8080
 ENV JAVA_OPTS="-XX:MaxRAMPercentage=75"
