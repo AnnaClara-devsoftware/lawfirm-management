@@ -1,0 +1,29 @@
+# Maven
+target/
+# Atenção: NÃO ignore .mvn/ — é onde fica o Maven Wrapper (maven-wrapper.properties).
+# Ignorá-lo quebra o `./mvnw` para quem clonar o repositório.
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Build artifacts
+*.jar
+*.war

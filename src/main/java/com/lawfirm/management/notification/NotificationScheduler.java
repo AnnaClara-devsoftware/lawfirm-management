@@ -1,0 +1,6 @@
+package com.lawfirm.management.notification;
+import com.lawfirm.management.appointment.*; import com.lawfirm.management.deadline.*; import com.lawfirm.management.user.User; import lombok.RequiredArgsConstructor; import org.springframework.data.domain.Pageable; import org.springframework.scheduling.annotation.Scheduled; import org.springframework.stereotype.Component; import org.springframework.transaction.annotation.Transactional; import java.time.*; import java.util.*;
+@Component @RequiredArgsConstructor public class NotificationScheduler {
+ private final DeadlineRepository deadlines; private final AppointmentRepository appointments; private final NotificationService notifications;
+ @Scheduled(cron="0 0 * * * *") @Transactional public void generateReminders(){LocalDate today=LocalDate.now();deadlines.findAllByDueDateBeforeAndStatus(today.plusDays(2),DeadlineStatus.PENDING,Pageable.unpaged()).forEach(d->{User u=d.getLegalCase().getAssignedLawyer();if(u!=null)notifications.createDeadlineReminder(d,u);});LocalDateTime now=LocalDateTime.now();appointments.findAllByStartsAtBetween(now,now.plusHours(24),Pageable.unpaged()).forEach(a->{if(a.getStatus()==AppointmentStatus.SCHEDULED)notifications.createAppointmentReminder(a,a.getAssignedUser());});}
+}
