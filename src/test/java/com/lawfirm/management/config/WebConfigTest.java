@@ -1,15 +1,1 @@
-package com.lawfirm.management.config;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class WebConfigTest {
-    @Test
-    void shouldLimitPageSizeTo100() {
-        var resolver = new PageableHandlerMethodArgumentResolver();
-        new WebConfig().customize(resolver);
-        assertEquals(100, resolver.getMaxPageSize());
-    }
-}
+package com.lawfirm.management.config; import org.junit.jupiter.api.Test; import org.springframework.data.web.PageableHandlerMethodArgumentResolver; import java.lang.reflect.Method; import static org.junit.jupiter.api.Assertions.*; class WebConfigTest { @Test void shouldLimitPageSizeTo100() throws Exception { var resolver = new PageableHandlerMethodArgumentResolver(); new WebConfig().customize(resolver); Method getMaxPageSize = resolver.getClass().getSuperclass().getDeclaredMethod("getMaxPageSize"); getMaxPageSize.setAccessible(true); assertEquals(100, getMaxPageSize.invoke(resolver)); } }
