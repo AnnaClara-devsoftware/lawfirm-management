@@ -65,6 +65,7 @@ export function LoginPage() {
           />
 
           {error && <p className="auth-card__error">{error}</p>}
+          {isLoading && ( <p className="auth-card__hint"> Isso pode levar até 1 minuto na primeira vez (o servidor gratuito "acorda" sob demanda). </p> )}
 
           <Button type="submit" isLoading={isLoading} icon={<LogIn size={16} />} className="auth-card__submit">
             Entrar

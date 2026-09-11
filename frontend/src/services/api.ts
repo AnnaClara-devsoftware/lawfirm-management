@@ -6,14 +6,14 @@ const baseURL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
 export const http = axios.create({
   baseURL: `${baseURL}/api`,
-  timeout: 20000,
+    timeout: 65000,
 });
 
 // Instância separada, sem interceptors, usada só para chamar /auth/refresh
 // de forma isolada (evita loop infinito de interceptor chamando a si mesmo).
 const refreshClient = axios.create({
   baseURL: `${baseURL}/api`,
-  timeout: 20000,
+    timeout: 65000,
 });
 
 let onSessionExpired: (() => void) | null = null;
